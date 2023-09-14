@@ -4,7 +4,7 @@ FRC Team 5427's scouter app
 
 This project uses Flutter. Copy this repo onto your local machine to make changes. ***Make pull requests to contribute new code***
 
-<h2>***DO NOT REVEAL PERSONAL OR TEAM APIKEYS AND OTHER CREDENTIAL***</h2>
+<h2>***DO NOT COMMIT ANY PERSONAL OR TEAM APIKEYS AND OTHER CREDENTIAL***</h2>
 
 A few resources to get you started if this is your first Flutter project:
 
