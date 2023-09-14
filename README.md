@@ -1,10 +1,8 @@
 # scouter_test_app_static_screen
 
-A new Flutter project.
+FRC Team 5427's scouter app
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
+This project uses flutter. Copy this repo onto your local machine and make changes. ***Make pull requests in order to contribute new code***
 
 A few resources to get you started if this is your first Flutter project:
 
