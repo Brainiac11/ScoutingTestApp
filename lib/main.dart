@@ -37,25 +37,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void showSnackBar() {
-    SnackBar snackBar = SnackBar(
-      content: const Text("Hello from SnackBar"),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      duration: const Duration(seconds: 3),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      elevation: 10,
-      behavior: SnackBarBehavior.floating,
-      margin: const EdgeInsets.all(10),
-      action: SnackBarAction(
-        label: "Undo",
-        onPressed: () {},
-      ),
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -64,80 +45,71 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Demo App"),
-        foregroundColor: Colors.amber,
-        backgroundColor: Colors.deepPurple,
-      ),
-      body: const Center(
-        child: Column(
-          children: [
-            ButtonRow(),
-            ButtonRow(),
-            ButtonRow(),
+        appBar: AppBar(
+          title: const Text("Demo App"),
+          actions: <Widget>[
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.add),
+            ),
           ],
         ),
+        body: GridView.count(
+          crossAxisCount: 2,
+          padding: const EdgeInsets.all(10),
+          physics: const BouncingScrollPhysics(),
+          shrinkWrap: true,
+          children: List.generate(100, (index) {
+            return Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                margin: const EdgeInsets.all(10),
+                child: const Center(
+                  child: Folder(),
+                ),
+              ),
+            );
+          }),
+        ));
+  }
+}
+
+class Folder extends StatelessWidget {
+  const Folder({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey,
+        borderRadius: BorderRadius.circular(30),
       ),
-    );
-  }
-}
-
-class ButtonRow extends StatelessWidget {
-  const ButtonRow({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        Padding(
-          padding: EdgeInsets.only(top: 30, bottom: 30),
-          child: Button(),
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 30, bottom: 30),
-          child: Button(),
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 30, bottom: 30),
-          child: Button(),
-        ),
-      ],
-    );
-  }
-}
-
-class Button extends StatelessWidget {
-  const Button({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: ElevatedButton(
-        onPressed: () {
-          if (kDebugMode) {
-            print("Hello from button");
-          }
-        },
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18),
+      margin: const EdgeInsets.all(10),
+      child: GridView.count(
+        crossAxisCount: 2,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        children: const <Widget>[
+          Center(
+            child: Icon(Icons.folder),
           ),
-          minimumSize: const Size(100, 100),
-          maximumSize: const Size(100, 100),
-          elevation: 10,
-          shadowColor: Colors.black,
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          textStyle: Theme.of(context).textTheme.headlineMedium,
-        ),
-        child: const Text("SnackBar"),
+          Center(
+            child: Text("Folder"),
+          ),
+          Center(
+            child: Icon(Icons.call, color: Colors.red),
+          ),
+          Center(
+            child: Icon(Icons.call, color: Colors.green),
+          ),
+        ],
       ),
     );
   }
