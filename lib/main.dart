@@ -39,19 +39,40 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    int counter = 1;
+    void showSnackBar() {
+      setState(() {
+        counter++;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Added $counter items"),
+          duration: const Duration(seconds: 2),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.blueGrey,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 8.0,
+          ),
+          clipBehavior: Clip.antiAlias,
+          elevation: 10,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          dismissDirection: DismissDirection.down,
+          closeIconColor: Colors.red,
+          showCloseIcon: true,
+        ),
+      );
+    }
 
     return Scaffold(
         appBar: AppBar(
           title: const Text("Demo App"),
           actions: <Widget>[
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                showSnackBar();
+              },
               icon: const Icon(Icons.add),
             ),
           ],
@@ -61,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: const EdgeInsets.all(10),
           physics: const BouncingScrollPhysics(),
           shrinkWrap: true,
-          children: List.generate(100, (index) {
+          children: List.generate(10, (index) {
             return Center(
               child: Container(
                 decoration: BoxDecoration(
